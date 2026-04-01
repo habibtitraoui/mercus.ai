@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --bg: #fafafa;
+  --surface: #ffffff;
+  --heading: #111111;
+  --muted-dark: #252525;
+  --muted: #6b6b6b;
+  --accent: #f58220;
+  --line: #efefef;
+  --header-offset: 110px;
+
+  font-family: 'Outfit', sans-serif;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--muted);
+  background: var(--bg);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background: var(--bg);
+}
+
+#root {
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(3.5rem, 5vw, 72px);
+  line-height: 1.08;
+  letter-spacing: -0.04em;
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h2 {
+  font-size: clamp(3rem, 4.5vw, 64px);
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  max-width: 980px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h3 {
+  font-size: 24px;
+}
+
+p {
+  font-size: 24px;
+  line-height: 1.45;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
