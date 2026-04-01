@@ -124,10 +124,10 @@ export function ContactSection() {
         </div>
 
         <form className="contact-form">
-          <input type="text" placeholder="name *" />
-          <input type="email" placeholder="email *" />
-          <input type="text" placeholder="website" />
-          <textarea placeholder="message" rows={5} />
+          <input type="text" placeholder="Name *" />
+          <input type="email" placeholder="Email *" />
+          <input type="text" placeholder="Website" />
+          <textarea placeholder="Message" rows={5} />
           <div className="form-actions">
             <button className="button button-primary" type="submit">
               Book a Demo

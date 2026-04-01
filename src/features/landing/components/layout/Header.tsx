@@ -1,3 +1,4 @@
+import type { MouseEvent } from 'react'
 import { useEffect, useState } from 'react'
 import { navItems } from '../../data/content'
 import { Brand } from '../ui/Brand'
@@ -24,6 +25,34 @@ export function Header() {
     setIsMenuOpen(false)
   }
 
+  const scrollToSection = (href: string) => {
+    const target = document.querySelector<HTMLElement>(href)
+    const header = document.querySelector<HTMLElement>('.topbar')
+
+    if (!target) {
+      return
+    }
+
+    const headerHeight = header?.offsetHeight ?? 0
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 8
+
+    window.history.replaceState(null, '', href)
+    setActiveHref(href)
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: 'smooth',
+    })
+  }
+
+  const handleNavClick = (
+    event: MouseEvent<HTMLAnchorElement>,
+    href: string,
+  ) => {
+    event.preventDefault()
+    closeMenu()
+    scrollToSection(href)
+  }
+
   return (
     <>
       <header className="topbar">
@@ -36,6 +65,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={activeHref === item.href ? 'is-active' : ''}
+                onClick={(event) => handleNavClick(event, item.href)}
               >
                 {item.label}
               </a>
@@ -87,7 +117,7 @@ export function Header() {
               key={item.href}
               href={item.href}
               className={activeHref === item.href ? 'is-active' : ''}
-              onClick={closeMenu}
+              onClick={(event) => handleNavClick(event, item.href)}
             >
               {item.label}
             </a>

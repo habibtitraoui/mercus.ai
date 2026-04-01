@@ -5,8 +5,8 @@ import { FeatureIcon } from '../components/ui/FeatureIcon'
 export function ProblemsSection() {
   return (
     <section className="section centered-section">
-      <div className="section-header" id="about">
-        <Eyebrow>Problems</Eyebrow>
+      <div className="section-header">
+        <Eyebrow id="about">Problems</Eyebrow>
         <h2>Your business is losing customers everyday!</h2>
       </div>
       <div className="pill-grid">

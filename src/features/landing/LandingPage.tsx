@@ -15,7 +15,7 @@ export function LandingPage() {
     <div className="page-shell">
       <Header />
 
-      <main>
+      <main className="page-main">
         <HeroSection />
         <ProblemsSection />
         <WorkforceSection />

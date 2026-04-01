@@ -4,8 +4,8 @@ import { faqs } from '../data/content'
 export function FaqSection() {
   return (
     <section className="section faq-section">
-      <div className="section-header" id="faq">
-        <Eyebrow>FAQs</Eyebrow>
+      <div className="section-header">
+        <Eyebrow id="faq">FAQs</Eyebrow>
         <h2>Frequently Asked Questions</h2>
       </div>
       <div className="faq-list">

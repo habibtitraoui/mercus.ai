@@ -5,8 +5,8 @@ import { workforceCards } from '../data/content'
 export function WorkforceSection() {
   return (
     <section className="section">
-      <div className="section-header" id="workforce">
-        <Eyebrow>Our AI workforce</Eyebrow>
+      <div className="section-header">
+        <Eyebrow id="workforce">Our AI workforce</Eyebrow>
         <h2>Meet your AI Workforce</h2>
       </div>
       <div className="card-grid">

@@ -4,8 +4,8 @@ import { steps } from '../data/content'
 export function ComplexitySection() {
   return (
     <section className="section complexity-section">
-      <div className="section-header" id="how-it-works">
-        <Eyebrow>Simple flow</Eyebrow>
+      <div className="section-header">
+        <Eyebrow id="how-it-works">Simple flow</Eyebrow>
         <h2>We hate complexity</h2>
       </div>
       <div className="complexity-layout">
