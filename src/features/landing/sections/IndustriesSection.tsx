@@ -15,7 +15,7 @@ export function IndustriesSection() {
             <div className="industry-icon" aria-hidden="true">
               <FeatureIcon className="industry-icon-svg" name={item.icon} />
             </div>
-            <div>
+            <div className="industry-card-content">
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </div>
