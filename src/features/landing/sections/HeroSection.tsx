@@ -12,7 +12,7 @@ export function HeroSection() {
         your team can focus on closing deals.
       </p>
       <div className="hero-actions">
-        <ButtonLink href="#workforce" icon="play">
+        <ButtonLink href="#workforce" icon="play" >
           Quick Demo
         </ButtonLink>
         <ButtonLink href="#contact" variant="secondary">
