@@ -12,10 +12,10 @@ import { WorkforceSection } from './sections/WorkforceSection'
 
 export function LandingPage() {
   return (
-    <div className="page-shell">
+    <div className="w-full pt-[88px] sm:pt-24 md:pt-[108px] lg:pt-[120px] 2xl:pt-[124px]">
       <Header />
 
-      <main className="page-main">
+      <main className="mx-auto w-full max-w-[1688px] space-y-16 px-4 sm:px-6 md:space-y-20 md:px-12 lg:px-20 2xl:px-[124px]">
         <HeroSection />
         <ProblemsSection />
         <WorkforceSection />

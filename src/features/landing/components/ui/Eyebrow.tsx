@@ -7,7 +7,10 @@ type EyebrowProps = {
 
 export function Eyebrow({ children, id }: EyebrowProps) {
   return (
-    <div className="eyebrow" id={id}>
+    <div
+      className="mx-auto mb-6 w-fit scroll-mt-28 rounded-full border border-[#f58220] bg-[rgba(245,130,32,0.05)] px-[18px] py-[10px] text-base leading-none text-[#f58220] md:scroll-mt-32"
+      id={id}
+    >
       {children}
     </div>
   )

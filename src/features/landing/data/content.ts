@@ -109,6 +109,11 @@ export const testimonials: Testimonial[] = [
     role: 'Business owner',
     text: 'Our prospects get replies in minutes, not hours. That alone changed the number of people who stayed in the funnel.',
   },
+  {
+    name: 'Mira Studio',
+    role: 'Operations lead',
+    text: 'Before Mercus, our team missed weekend enquiries. Now every message gets a fast reply, and booked calls come in far more consistently.',
+  },
 ]
 
 export const faqs = [

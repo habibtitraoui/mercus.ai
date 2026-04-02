@@ -2,13 +2,15 @@ import { Eyebrow } from '../components/ui/Eyebrow'
 
 export function ContactSection() {
   return (
-    <section className="section contact-section" id="contact">
+    <section id="contact" className="flex flex-col items-center text-center">
       <Eyebrow>Book a demo</Eyebrow>
-      <h2>Your next customer is already messaging you</h2>
-      <div className="contact-layout">
-        <div className="contact-brand-block">
+      <h2 className="mx-auto max-w-[980px] text-center text-[clamp(2.25rem,6vw,64px)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#111111]">
+        Your next customer is already messaging you
+      </h2>
+      <div className="mt-16 grid w-full grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(260px,1fr)_minmax(320px,520px)] lg:gap-14">
+        <div className="relative hidden min-h-[320px] items-center justify-center lg:flex">
           <svg
-            className="contact-brand-image"
+            className="block h-auto w-full max-w-[540px]"
             viewBox="0 0 503 313"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -123,13 +125,32 @@ export function ContactSection() {
           </svg>
         </div>
 
-        <form className="contact-form">
-          <input type="text" placeholder="Name *" />
-          <input type="email" placeholder="Email *" />
-          <input type="text" placeholder="Website" />
-          <textarea placeholder="Message" rows={5} />
-          <div className="form-actions">
-            <button className="button button-primary" type="submit">
+        <form className="flex w-full flex-col gap-3.5">
+          <input
+            type="text"
+            placeholder="Name *"
+            className="w-full rounded-md border border-[#d9d9d9] bg-white px-[18px] py-4 text-base text-[#111111] shadow-[0_10px_24px_rgba(17,17,17,0.03)] outline-none transition focus:border-[#f58220] focus:shadow-[0_0_0_4px_rgba(245,130,32,0.08)]"
+          />
+          <input
+            type="email"
+            placeholder="Email *"
+            className="w-full rounded-md border border-[#d9d9d9] bg-white px-[18px] py-4 text-base text-[#111111] shadow-[0_10px_24px_rgba(17,17,17,0.03)] outline-none transition focus:border-[#f58220] focus:shadow-[0_0_0_4px_rgba(245,130,32,0.08)]"
+          />
+          <input
+            type="text"
+            placeholder="Website"
+            className="w-full rounded-md border border-[#d9d9d9] bg-white px-[18px] py-4 text-base text-[#111111] shadow-[0_10px_24px_rgba(17,17,17,0.03)] outline-none transition focus:border-[#f58220] focus:shadow-[0_0_0_4px_rgba(245,130,32,0.08)]"
+          />
+          <textarea
+            placeholder="Message"
+            rows={5}
+            className="min-h-32 w-full resize-none rounded-md border border-[#d9d9d9] bg-white px-[18px] py-4 text-base text-[#111111] shadow-[0_10px_24px_rgba(17,17,17,0.03)] outline-none transition focus:border-[#f58220] focus:shadow-[0_0_0_4px_rgba(245,130,32,0.08)]"
+          />
+          <div className="mt-1.5 flex justify-end">
+            <button
+              className="min-h-11 w-full rounded-lg border border-[#f58220] bg-[#f58220] px-3.5 text-sm text-white shadow-[0_12px_30px_rgba(245,130,32,0.18)] sm:w-auto sm:min-w-[132px]"
+              type="submit"
+            >
               Book a Demo
             </button>
           </div>
