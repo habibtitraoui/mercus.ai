@@ -1,127 +1,121 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { Eyebrow } from '../components/ui/Eyebrow'
+import { FeatureIcon } from '../components/ui/FeatureIcon'
 import { testimonials } from '../data/content'
 
 export function TestimonialsSection() {
-  const [activePage, setActivePage] = useState(0)
-  const [slidesPerView, setSlidesPerView] = useState(1)
-  const slideRefs = useRef<Array<HTMLElement | null>>([])
+  const [activeSlide, setActiveSlide] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
 
+  const slidesPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1
+
+  const totalSlides = testimonials.length
+  const maxIndex = totalSlides - slidesPerView
+
+  const scrollToSlide = (index: number) => {
+    if (!containerRef.current) return
+    const container = containerRef.current
+    const slideWidth = container.scrollWidth / totalSlides
+    container.scrollTo({
+      left: slideWidth * index,
+      behavior: 'smooth',
+    })
+    setActiveSlide(index)
+  }
+
+  const prevSlide = () => {
+    const newIndex = activeSlide === 0 ? maxIndex : activeSlide - 1
+    scrollToSlide(newIndex)
+  }
+
+  const nextSlide = () => {
+    const newIndex = activeSlide === maxIndex ? 0 : activeSlide + 1
+    scrollToSlide(newIndex)
+  }
+
+  // Update activeSlide on resize (optional)
   useEffect(() => {
     const handleResize = () => {
-      const nextSlidesPerView =
-        window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1
-
-      setSlidesPerView(nextSlidesPerView)
-      setActivePage((current) =>
-        Math.min(current, Math.max(0, testimonials.length - nextSlidesPerView)),
-      )
+      setActiveSlide((prev) => Math.min(prev, maxIndex))
     }
-
-    handleResize()
     window.addEventListener('resize', handleResize)
-
-    return () => {
-      window.removeEventListener('resize', handleResize)
-    }
-  }, [])
-
-  useEffect(() => {
-    slideRefs.current[activePage]?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'nearest',
-      inline: 'start',
-    })
-  }, [activePage])
-
-  const pageCount = Math.max(1, testimonials.length - slidesPerView + 1)
-
-  const previousTestimonial = () => {
-    setActivePage((current) => (current === 0 ? pageCount - 1 : current - 1))
-  }
-
-  const nextTestimonial = () => {
-    setActivePage((current) => (current === pageCount - 1 ? 0 : current + 1))
-  }
+    return () => window.removeEventListener('resize', handleResize)
+  }, [maxIndex])
 
   return (
     <section className="flex flex-col items-center text-center">
       <Eyebrow>Testimonials</Eyebrow>
-      <h2 className="mx-auto max-w-[980px] text-center text-[clamp(2.25rem,6vw,64px)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#111111]">
+      <h2 className="mx-auto max-w-245 text-center text-[clamp(2.25rem,6vw,64px)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#111111]">
         We all need proof
       </h2>
+
       <div className="mt-16 w-full">
         <div
+          ref={containerRef}
           className="flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           style={{ msOverflowStyle: 'none' }}
         >
-          {testimonials.map((item, index) => (
+          {testimonials.map((item) => (
             <article
-              className="w-full shrink-0 snap-start basis-full rounded-3xl border border-[rgba(17,17,17,0.06)] bg-white p-[22px] text-left shadow-[0_18px_38px_rgba(17,17,17,0.04)] md:basis-[calc((100%-24px)/2)] lg:basis-[calc((100%-48px)/3)] lg:p-7"
               key={item.name}
-              ref={(node) => {
-                slideRefs.current[index] = node
-              }}
+              className="w-full shrink-0 snap-start basis-full rounded-3xl border border-[rgba(17,17,17,0.06)] bg-white p-5.5 text-left shadow-[0_18px_38px_rgba(17,17,17,0.04)] md:basis-[calc((100%-24px)/2)] lg:basis-[calc((100%-48px)/3)] lg:p-7"
             >
               <div className="flex items-center gap-3">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#efefef] text-xl uppercase text-[#111111]">
                   {item.name.charAt(0)}
                 </div>
                 <div>
-                  <h3 className="mt-6 mb-2.5 text-2xl leading-[1.3] text-[#111111]">
-                    {item.name}
-                  </h3>
-                  <p className="text-base leading-7 text-[#6b6b6b] sm:text-2xl sm:leading-[1.45]">
-                    {item.role}
-                  </p>
+                  <h3 className="mt-6 mb-2.5 text-2xl leading-[1.3] text-[#111111]">{item.name}</h3>
+                  <p className="text-base leading-7 text-[#6b6b6b] sm:text-2xl sm:leading-[1.45]">{item.role}</p>
                 </div>
               </div>
-              <p className="my-6 text-base leading-7 text-[#6b6b6b] sm:text-2xl sm:leading-[1.45]">
-                {item.text}
-              </p>
-              <a
-                href="#contact"
-                className="text-base text-[#f58220] no-underline sm:text-xl"
-              >
+
+              <p className="my-6 text-base leading-7 text-[#6b6b6b] sm:text-2xl sm:leading-[1.45]">{item.text}</p>
+
+              <a href="#contact" className="text-base text-[#f58220] no-underline sm:text-xl">
                 Read story
               </a>
             </article>
           ))}
         </div>
       </div>
+
+      {/* Pagination + Arrows */}
       <div className="mt-16 flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
-        <div className="flex gap-2" aria-label="Testimonials pagination">
-          {Array.from({ length: pageCount }).map((_, index) => (
+        {/* Pagination Dots */}
+        <div className="flex gap-2">
+          {testimonials.map((_, index) => (
             <button
-              type="button"
-              key={`testimonial-page-${index + 1}`}
-              aria-label={`Go to testimonial slide ${index + 1}`}
-              aria-pressed={activePage === index}
-              className={`h-2 rounded-full transition-all ${
-                activePage === index
-                  ? 'w-[18px] bg-[#f58220]'
+              key={index}
+              onClick={() => scrollToSlide(index)}
+              className={`h-2 rounded-full transition-all cursor-pointer ${
+                index === activeSlide
+                  ? 'w-4.5 bg-[#f58220]'
                   : 'w-2 bg-[rgba(245,130,32,0.3)]'
               }`}
-              onClick={() => setActivePage(index)}
+              aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
+
+        {/* Arrows */}
         <div className="flex gap-2.5">
           <button
             type="button"
-            className="h-[52px] w-[52px] rounded-full border border-[#f58220] bg-white text-2xl text-[#f58220]"
+            onClick={prevSlide}
+            className="flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-white text-[#f58220] cursor-pointer"
             aria-label="Previous testimonial"
-            onClick={previousTestimonial}
           >
-            {'<-'}
+            <FeatureIcon name="chevronLeft" className="h-6 w-6" />
           </button>
+
           <button
             type="button"
-            className="h-[52px] w-[52px] rounded-full border border-[#f58220] bg-[#f58220] text-2xl text-white"
+            onClick={nextSlide}
+            className="flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-[#f58220] text-white cursor-pointer"
             aria-label="Next testimonial"
-            onClick={nextTestimonial}
           >
-            {'->'}
+            <FeatureIcon name="chevronRight" className="h-6 w-6" />
           </button>
         </div>
       </div>

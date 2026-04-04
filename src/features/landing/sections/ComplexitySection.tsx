@@ -6,13 +6,13 @@ export function ComplexitySection() {
     <section className="text-center">
       <div className="flex flex-col items-center text-center">
         <Eyebrow id="how-it-works">Simple flow</Eyebrow>
-        <h2 className="mx-auto max-w-[980px] text-center text-[clamp(2.25rem,6vw,64px)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#111111]">
+        <h2 className="mx-auto max-w-245 text-center text-[clamp(2.25rem,6vw,64px)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#111111]">
           We hate complexity
         </h2>
       </div>
       <div className="mt-16 grid grid-cols-1 items-center gap-7 lg:grid-cols-[minmax(280px,1fr)_minmax(320px,1fr)] lg:gap-10">
         <div
-          className="relative mx-auto h-[200px] w-[200px] rounded-full shadow-[inset_0_22px_30px_rgba(255,255,255,0.25),inset_0_-16px_24px_rgba(132,64,0,0.22),0_28px_40px_rgba(230,129,32,0.2)] sm:h-[240px] sm:w-[240px]"
+          className="relative mx-auto h-50 w-50 rounded-full shadow-[inset_0_22px_30px_rgba(255,255,255,0.25),inset_0_-16px_24px_rgba(132,64,0,0.22),0_28px_40px_rgba(230,129,32,0.2)] sm:h-60 sm:w-60"
           aria-hidden="true"
           style={{
             background:
@@ -20,7 +20,7 @@ export function ComplexitySection() {
           }}
         >
           <div className="absolute inset-7 rounded-full border-2 border-[rgba(255,225,184,0.65)]" />
-          <span className="absolute top-[25px] left-[99px] h-[150px] w-0.5 rotate-[32deg] bg-[rgba(255,226,182,0.7)] sm:top-7 sm:left-[119px] sm:h-[184px]" />
+          <span className="absolute top-6.25 left-24.75 h-37.5 w-0.5 rotate-32 bg-[rgba(255,226,182,0.7)] sm:top-7 sm:left-[119px] sm:h-[184px]" />
           <span className="absolute top-[25px] left-[99px] h-[150px] w-0.5 -rotate-[32deg] bg-[rgba(255,226,182,0.7)] sm:top-7 sm:left-[119px] sm:h-[184px]" />
           <span className="absolute top-[99px] left-[25px] h-0.5 w-[150px] rotate-[24deg] bg-[rgba(255,226,182,0.7)] sm:top-[119px] sm:left-7 sm:w-[184px]" />
           <span className="absolute top-[99px] left-[25px] h-0.5 w-[150px] -rotate-[24deg] bg-[rgba(255,226,182,0.7)] sm:top-[119px] sm:left-7 sm:w-[184px]" />

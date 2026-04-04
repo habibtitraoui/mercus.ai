@@ -285,6 +285,26 @@ const iconMap = {
       />
     </>
   ),
+  chevronLeft: (
+  <path
+    d="M22 8l-8 10 8 10"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+),
+chevronRight: (
+  <path
+    d="M14 8l8 10-8 10"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.6"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  />
+),
 } as const
 
 export function FeatureIcon({ name, className = '' }: FeatureIconProps) {
