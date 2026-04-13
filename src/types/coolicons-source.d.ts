@@ -28,6 +28,11 @@ declare module 'coolicons-react/src/outline/Communication/Mail.jsx' {
   export default Icon
 }
 
+declare module 'coolicons-react/src/outline/Communication/PaperPlane.jsx' {
+  const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
+  export default Icon
+}
+
 declare module 'coolicons-react/src/outline/Communication/Phone.jsx' {
   const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
   export default Icon
@@ -43,6 +48,11 @@ declare module 'coolicons-react/src/outline/Interface/CreditCard01.jsx' {
   export default Icon
 }
 
+declare module 'coolicons-react/src/outline/Interface/CheckAll.jsx' {
+  const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
+  export default Icon
+}
+
 declare module 'coolicons-react/src/outline/Interface/ShoppingCart02.jsx' {
   const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
   export default Icon
@@ -54,6 +64,11 @@ declare module 'coolicons-react/src/outline/Interface/Suitcase.jsx' {
 }
 
 declare module 'coolicons-react/src/outline/Media/Headphones.jsx' {
+  const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
+  export default Icon
+}
+
+declare module 'coolicons-react/src/outline/Live/Bulb.jsx' {
   const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
   export default Icon
 }
@@ -74,6 +89,11 @@ declare module 'coolicons-react/src/outline/Navigation/HouseCheck.jsx' {
 }
 
 declare module 'coolicons-react/src/outline/User/UserClose.jsx' {
+  const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
+  export default Icon
+}
+
+declare module 'coolicons-react/src/outline/User/UsersGroup.jsx' {
   const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
   export default Icon
 }
