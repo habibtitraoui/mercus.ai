@@ -92,22 +92,22 @@ export const steps: StepItem[] = [
 export const industries: TextCard[] = [
   {
     title: 'Real Estate',
-    text: 'AI qualifies property leads and keeps the pipeline warm.',
+    text: 'AI qualifies property leads.',
     icon: Building,
   },
   {
     title: 'Service businesses',
-    text: 'AI handles enquiries and follow-ups without missed opportunities.',
+    text: 'AI handles inquiries and follow-ups.',
     icon: Briefcase,
   },
   {
     title: 'Ecommerce',
-    text: 'AI confirms orders and reduces the boring support backlog.',
+    text: 'AI confirms orders and reduces the boring stuff.',
     icon: ShoppingCart,
   },
   {
     title: 'Restaurants and Clinics',
-    text: 'AI schedules reservations and messages customers back instantly.',
+    text: 'AI handles reservations and messages.',
     icon: Calendar,
   },
 ]
