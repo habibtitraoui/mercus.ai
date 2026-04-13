@@ -1,3 +1,7 @@
+import type { ComponentType, SVGProps } from 'react'
+
+export type IconComponent = ComponentType<SVGProps<SVGSVGElement>>
+
 export type NavItem = {
   label: string
   href: string
@@ -6,7 +10,7 @@ export type NavItem = {
 export type TextCard = {
   title: string
   text: string
-  icon: string
+  icon: IconComponent
 }
 
 export type StepItem = {
@@ -23,5 +27,5 @@ export type Testimonial = {
 
 export type PainPoint = {
   label: string
-  icon: string
+  icon: IconComponent
 }

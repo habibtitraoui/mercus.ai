@@ -1,12 +1,12 @@
 import type { ReactNode } from 'react'
-import { FeatureIcon } from './FeatureIcon'
+import type { IconComponent } from '../../types'
 
 type ButtonLinkProps = {
   href: string
   children: ReactNode
   variant?: 'primary' | 'secondary'
   small?: boolean
-  icon?: string
+  icon?: IconComponent
   className?: string
 }
 
@@ -18,6 +18,7 @@ export function ButtonLink({
   icon,
   className = '',
 }: ButtonLinkProps) {
+  const Icon = icon
   const baseClassName =
     'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg border border-[#f58220] px-[18px] text-base no-underline transition hover:-translate-y-0.5'
   const variantClassName =
@@ -33,7 +34,7 @@ export function ButtonLink({
 
   return (
     <a className={resolvedClassName} href={href}>
-      {icon ? <FeatureIcon className="h-4 w-4 shrink-0" name={icon} /> : null}
+      {Icon ? <Icon className="h-4 w-4 shrink-0" aria-hidden="true" /> : null}
       {children}
     </a>
   )

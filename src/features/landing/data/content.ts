@@ -1,3 +1,22 @@
+import {
+  ArrowLeftMD,
+  ArrowRightMD,
+  Calendar,
+  Chat,
+  CloseCircle,
+  Building,
+  Briefcase,
+  CreditCard,
+  Headphone,
+  Mail,
+  Phone,
+  PhoneCall,
+  Play,
+  Refresh,
+  ShoppingCart,
+  Target,
+  User,
+} from '../components/ui/coolicons'
 import type {
   NavItem,
   PainPoint,
@@ -14,43 +33,43 @@ export const navItems: NavItem[] = [
 ]
 
 export const painPoints: PainPoint[] = [
-  { label: 'Messages unanswered', icon: 'message' },
-  { label: 'Leads forgotten', icon: 'userOff' },
-  { label: 'Orders not confirmed', icon: 'ban' },
-  { label: 'Slow response times', icon: 'slow' },
-  { label: 'Calls missed', icon: 'phone' },
+  { label: 'Messages unanswered', icon: Chat },
+  { label: 'Leads forgotten', icon: User },
+  { label: 'Orders not confirmed', icon: CloseCircle },
+  { label: 'Slow response times', icon: Refresh },
+  { label: 'Calls missed', icon: Phone },
 ]
 
 export const workforceCards: TextCard[] = [
   {
     title: 'Customer Support',
     text: 'Answers questions instantly and keeps service quality consistent.',
-    icon: 'headset',
+    icon: Headphone,
   },
   {
     title: 'Order Confirmation',
     text: 'Confirms orders faster and reduces costly mistakes.',
-    icon: 'checkCard',
+    icon: CreditCard,
   },
   {
     title: 'Lead Qualification',
     text: 'Filters and tags prospects so sales teams focus on intent.',
-    icon: 'target',
+    icon: Target,
   },
   {
     title: 'Follow-Ups',
     text: 'Stays on every lead automatically until the conversation moves.',
-    icon: 'repeat',
+    icon: Refresh,
   },
   {
     title: 'DM Agent',
     text: 'Replies on Instagram, WhatsApp, Messenger, and your site chat.',
-    icon: 'dm',
+    icon: Mail,
   },
   {
     title: 'Voice Receptionist',
     text: 'Answers inbound calls around the clock with natural routing.',
-    icon: 'receiver',
+    icon: PhoneCall,
   },
 ]
 
@@ -74,24 +93,30 @@ export const industries: TextCard[] = [
   {
     title: 'Real Estate',
     text: 'AI qualifies property leads and keeps the pipeline warm.',
-    icon: 'building',
+    icon: Building,
   },
   {
     title: 'Service businesses',
     text: 'AI handles enquiries and follow-ups without missed opportunities.',
-    icon: 'briefcase',
+    icon: Briefcase,
   },
   {
     title: 'Ecommerce',
     text: 'AI confirms orders and reduces the boring support backlog.',
-    icon: 'cart',
+    icon: ShoppingCart,
   },
   {
     title: 'Restaurants and Clinics',
     text: 'AI schedules reservations and messages customers back instantly.',
-    icon: 'calendar',
+    icon: Calendar,
   },
 ]
+
+export const landingUiIcons = {
+  play: Play,
+  chevronLeft: ArrowLeftMD,
+  chevronRight: ArrowRightMD,
+} as const
 
 export const testimonials: Testimonial[] = [
   {

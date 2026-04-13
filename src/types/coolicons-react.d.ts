@@ -7,6 +7,8 @@ declare module "coolicons-react" {
 
   export const Chat: React.FC<IconProps>
   export const User: React.FC<IconProps>
+  export const ArrowLeftMD: React.FC<IconProps>
+  export const ArrowRightMD: React.FC<IconProps>
   export const CloseCircle: React.FC<IconProps>
   export const Check: React.FC<IconProps>
   export const Phone: React.FC<IconProps>

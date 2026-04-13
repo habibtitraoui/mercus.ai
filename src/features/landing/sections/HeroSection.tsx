@@ -1,5 +1,6 @@
 import { ButtonLink } from '../components/ui/ButtonLink'
 import { Eyebrow } from '../components/ui/Eyebrow'
+import { landingUiIcons } from '../data/content'
 
 export function HeroSection() {
   return (
@@ -17,7 +18,7 @@ export function HeroSection() {
         your team can focus on closing deals.
       </p>
       <div className="mt-[34px] flex flex-col items-center justify-center gap-3.5 sm:flex-row">
-        <ButtonLink href="#workforce" icon="play">
+        <ButtonLink href="#workforce" icon={landingUiIcons.play}>
           Quick Demo
         </ButtonLink>
         <ButtonLink href="#contact" variant="secondary">

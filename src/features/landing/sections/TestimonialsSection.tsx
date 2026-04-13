@@ -1,9 +1,10 @@
 import { useRef, useState, useEffect } from 'react'
 import { Eyebrow } from '../components/ui/Eyebrow'
-import { FeatureIcon } from '../components/ui/FeatureIcon'
-import { testimonials } from '../data/content'
+import { landingUiIcons, testimonials } from '../data/content'
 
 export function TestimonialsSection() {
+  const ChevronLeftIcon = landingUiIcons.chevronLeft
+  const ChevronRightIcon = landingUiIcons.chevronRight
   const [activeSlide, setActiveSlide] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -106,7 +107,7 @@ export function TestimonialsSection() {
             className="flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-white text-[#f58220] cursor-pointer"
             aria-label="Previous testimonial"
           >
-            <FeatureIcon name="chevronLeft" className="h-6 w-6" />
+            <ChevronLeftIcon className="h-6 w-6" aria-hidden="true" />
           </button>
 
           <button
@@ -115,7 +116,7 @@ export function TestimonialsSection() {
             className="flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-[#f58220] text-white cursor-pointer"
             aria-label="Next testimonial"
           >
-            <FeatureIcon name="chevronRight" className="h-6 w-6" />
+            <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
           </button>
         </div>
       </div>

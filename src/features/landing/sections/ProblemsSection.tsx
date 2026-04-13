@@ -1,5 +1,4 @@
 import { Eyebrow } from '../components/ui/Eyebrow'
-import { FeatureIcon } from '../components/ui/FeatureIcon'
 import { painPoints } from '../data/content'
 
 export function ProblemsSection() {
@@ -13,6 +12,7 @@ export function ProblemsSection() {
       </div>
       <div className="mt-16 grid grid-cols-1 justify-items-center gap-x-5 gap-y-5 md:grid-cols-2 md:gap-x-[55px] md:gap-y-[55px] lg:grid-cols-6">
         {painPoints.map((item, index) => {
+          const Icon = item.icon
           const offsetClassName =
             index === 3 ? 'lg:col-start-2 lg:col-span-2' : index === 4 ? 'lg:col-start-4 lg:col-span-2' : 'lg:col-span-2'
 
@@ -29,7 +29,7 @@ export function ProblemsSection() {
                 }}
               />
               <span className="inline-flex h-[34.53px] w-[34.53px] shrink-0 items-center justify-center rounded-[6.63px] bg-[linear-gradient(180deg,#ff1d1d_0%,#ff0606_100%)] text-white shadow-[0_14px_28px_rgba(255,0,4,0.18),inset_0_0_0_1px_rgba(255,255,255,0.18)]">
-                <FeatureIcon className="h-[18px] w-[18px] sm:h-[30px] sm:w-[30px]" name={item.icon} />
+                <Icon className="h-[18px] w-[18px] sm:h-[30px] sm:w-[30px]" aria-hidden="true" />
               </span>
               <span>{item.label}</span>
             </div>
