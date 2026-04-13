@@ -8,15 +8,19 @@ export function TestimonialsSection() {
   const [activeSlide, setActiveSlide] = useState(0)
   const containerRef = useRef<HTMLDivElement>(null)
 
-  const slidesPerView = window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1
+  const slidesPerView = window.innerWidth >= 1024 ? 2.5 : window.innerWidth >= 768 ? 2 : 1
 
   const totalSlides = testimonials.length
-  const maxIndex = totalSlides - slidesPerView
+  const maxIndex = Math.max(totalSlides - Math.ceil(slidesPerView), 0)
+  const pageCount = maxIndex + 1
 
   const scrollToSlide = (index: number) => {
     if (!containerRef.current) return
     const container = containerRef.current
-    const slideWidth = container.scrollWidth / totalSlides
+    const firstSlide = container.firstElementChild as HTMLElement | null
+    const gap = Number.parseFloat(window.getComputedStyle(container).columnGap || '0')
+    const slideWidth = firstSlide ? firstSlide.getBoundingClientRect().width + gap : 0
+
     container.scrollTo({
       left: slideWidth * index,
       behavior: 'smooth',
@@ -43,6 +47,14 @@ export function TestimonialsSection() {
     return () => window.removeEventListener('resize', handleResize)
   }, [maxIndex])
 
+  const getInitials = (name: string) =>
+    name
+      .split(' ')
+      .filter(Boolean)
+      .slice(0, 2)
+      .map((part) => part.charAt(0).toUpperCase())
+      .join('')
+
   return (
     <section className="flex flex-col items-center text-center">
       <Eyebrow>Testimonials</Eyebrow>
@@ -59,52 +71,59 @@ export function TestimonialsSection() {
           {testimonials.map((item) => (
             <article
               key={item.name}
-              className="w-full shrink-0 snap-start basis-full rounded-3xl border border-[rgba(17,17,17,0.06)] bg-white p-5.5 text-left shadow-[0_18px_38px_rgba(17,17,17,0.04)] md:basis-[calc((100%-24px)/2)] lg:basis-[calc((100%-48px)/3)] lg:p-7"
+              className="w-full shrink-0 snap-start basis-full rounded-[14px] border border-[rgba(17,17,17,0.03)] bg-white px-5 py-4 text-left shadow-[0_10px_28px_rgba(17,17,17,0.05)] md:basis-[calc((100%-24px)/2)] md:px-6 md:py-5 lg:basis-[calc((100%-48px)/2.5)]"
             >
-              <div className="flex items-center gap-3">
-                <div className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-[#efefef] text-xl uppercase text-[#111111]">
-                  {item.name.charAt(0)}
+              <div className="flex items-start gap-4">
+                <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[1rem] font-semibold uppercase tracking-[-0.04em] text-[#111111] shadow-[0_6px_14px_rgba(17,17,17,0.14)]">
+                  {getInitials(item.name)}
                 </div>
-                <div>
-                  <h3 className="mt-6 mb-2.5 text-2xl leading-[1.3] text-[#111111]">{item.name}</h3>
-                  <p className="text-base leading-7 text-[#6b6b6b] sm:text-2xl sm:leading-[1.45]">{item.role}</p>
+                <div className="min-w-0">
+                  <h3 className="text-[1.125rem] font-semibold leading-[1.1] tracking-[-0.03em] text-[#111111] md:text-[1.625rem]">
+                    {item.name}
+                  </h3>
+                  <p className="mt-1 text-[0.7rem] uppercase tracking-[0.14em] text-[#9f9f9f] md:text-[0.78rem]">
+                    {item.role}
+                  </p>
                 </div>
               </div>
 
-              <p className="my-6 text-base leading-7 text-[#6b6b6b] sm:text-2xl sm:leading-[1.45]">{item.text}</p>
+              <p className="mt-5 min-h-[96px] text-[0.95rem] leading-[1.55] text-[#4e4e4e] md:min-h-[112px] md:text-[1rem]">
+                {item.text}
+              </p>
 
-              <a href="#contact" className="text-base text-[#f58220] no-underline sm:text-xl">
-                Read story
-              </a>
+              <div className="mt-5 flex items-center gap-2 text-[0.8rem] text-[#b0b0b0] md:text-[0.85rem]">
+                <span
+                  aria-hidden="true"
+                  className="inline-block h-2.5 w-3.5 rounded-[2px] bg-[linear-gradient(135deg,#f58220_0%,#ffae46_100%)] [clip-path:polygon(0_100%,18%_100%,33%_20%,51%_100%,69%_20%,100%_100%,82%_100%,67%_48%,49%_100%,31%_48%,16%_100%)]"
+                />
+                <span>Mercus user, 2026.03.29</span>
+              </div>
             </article>
           ))}
         </div>
       </div>
 
-      {/* Pagination + Arrows */}
-      <div className="mt-16 flex w-full flex-col items-center justify-between gap-4 sm:flex-row">
-        {/* Pagination Dots */}
-        <div className="flex gap-2">
-          {testimonials.map((_, index) => (
+      <div className="mt-12 flex w-full flex-col items-center justify-between gap-6 sm:flex-row">
+        <div className="flex gap-3">
+          {Array.from({ length: pageCount }, (_, index) => (
             <button
               key={index}
               onClick={() => scrollToSlide(index)}
-              className={`h-2 rounded-full transition-all cursor-pointer ${
+              className={`cursor-pointer rounded-full border border-[#f58220] transition-all ${
                 index === activeSlide
-                  ? 'w-4.5 bg-[#f58220]'
-                  : 'w-2 bg-[rgba(245,130,32,0.3)]'
+                  ? 'h-2.5 w-7 bg-[#f58220]'
+                  : 'h-2.5 w-2.5 bg-transparent'
               }`}
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
         </div>
 
-        {/* Arrows */}
-        <div className="flex gap-2.5">
+        <div className="flex gap-3">
           <button
             type="button"
             onClick={prevSlide}
-            className="flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-white text-[#f58220] cursor-pointer"
+            className="cursor-pointer flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-white text-[#f58220] shadow-[0_10px_24px_rgba(245,130,32,0.08)]"
             aria-label="Previous testimonial"
           >
             <ChevronLeftIcon className="h-6 w-6" aria-hidden="true" />
@@ -113,7 +132,7 @@ export function TestimonialsSection() {
           <button
             type="button"
             onClick={nextSlide}
-            className="flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-[#f58220] text-white cursor-pointer"
+            className="cursor-pointer flex h-13 w-13 items-center justify-center rounded-full border border-[#f58220] bg-[#f58220] text-white shadow-[0_12px_26px_rgba(245,130,32,0.22)]"
             aria-label="Next testimonial"
           >
             <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
