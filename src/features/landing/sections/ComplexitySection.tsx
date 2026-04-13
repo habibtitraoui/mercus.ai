@@ -6,7 +6,11 @@ import { steps } from '../data/content'
 export function ComplexitySection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [activeStep, setActiveStep] = useState(0)
-  const [progress, setProgress] = useState(1 / steps.length)
+  const stepIndicatorSize = 75
+  const connectorHeight = 120
+  const stepOffset = stepIndicatorSize + 32
+  const connectorWidth = 3
+  const stepAxis = -stepOffset + (stepIndicatorSize / 2)
 
   useEffect(() => {
     let ticking = false
@@ -29,7 +33,6 @@ export function ComplexitySection() {
       )
 
       setActiveStep(nextStep)
-      setProgress((travelled / (steps.length * viewportHeight)) + 1 / steps.length)
     }
 
     const onScroll = () => {
@@ -66,30 +69,51 @@ export function ComplexitySection() {
       <div className="sticky top-0 mt-16 flex min-h-screen items-center">
         <div className="grid w-full grid-cols-1 items-center gap-10 lg:grid-cols-[minmax(280px,1fr)_minmax(340px,1fr)] lg:gap-16">
           <div className="relative mx-auto flex w-full max-w-[500px]">
-            <div className="absolute top-4 bottom-4 left-4 w-0.5 bg-[#dddddd]">
-              <div
-                className="w-full rounded-full bg-[linear-gradient(180deg,#ffb56e_0%,#f58220_100%)] transition-[height] duration-500"
-                style={{ height: `${Math.min(progress * 100, 100)}%` }}
-              />
-            </div>
-
-            <div className="flex w-full flex-col gap-10 pl-12 sm:gap-14">
+            <div className="flex w-full flex-col pl-[107px]">
               {steps.map((item, index) => {
                 const isActive = index === activeStep
+                const hasConnector = index < steps.length - 1
+                const connectorActive = index < activeStep
 
                 return (
-                  <div className="relative text-left" key={item.title}>
+                  <div
+                    className="relative text-left"
+                    key={item.title}
+                    style={{ minHeight: hasConnector ? `${stepIndicatorSize + connectorHeight}px` : `${stepIndicatorSize}px` }}
+                  >
                     <div
-                      className={`absolute -left-[46px] top-1 flex h-8 w-8 items-center justify-center rounded-full border text-sm font-bold transition-all duration-300 ${
+                      className={`absolute top-0 flex h-[75px] w-[75px] items-center justify-center rounded-full text-[52px] font-light leading-none transition-all duration-300 ${
                         isActive
-                          ? 'scale-110 border-[#f58220] bg-[linear-gradient(180deg,#ffb56e_0%,#f58220_100%)] text-white shadow-[0_12px_24px_rgba(245,130,32,0.24)]'
-                          : 'border-[#d7d7d7] bg-white text-[#909090]'
+                          ? 'bg-[linear-gradient(180deg,#ff7a18_0%,#ffb21d_100%)] text-white'
+                          : 'bg-[#d9d9d9] text-white'
                       }`}
+                      style={{ left: `${-stepOffset}px` }}
                     >
-                      {String(index + 1).padStart(2, '0')}
+                      <span
+                        className={`flex h-full w-full items-center justify-center rounded-full ${
+                          !isActive && index === steps.length - 1 ? 'ring-[5px] ring-[#d9d9d9] ring-offset-[6px] ring-offset-white' : ''
+                        }`}
+                      >
+                        {index + 1}
+                      </span>
                     </div>
+                    {hasConnector ? (
+                      <div
+                        className={`absolute rounded-full transition-colors duration-300 ${
+                          connectorActive
+                            ? 'bg-[linear-gradient(180deg,#ff7a18_0%,#ffb21d_100%)]'
+                            : 'bg-[#d9d9d9]'
+                        }`}
+                        style={{
+                          top: `${stepIndicatorSize}px`,
+                          left: `${stepAxis - (connectorWidth / 2)}px`,
+                          width: `${connectorWidth}px`,
+                          height: `${connectorHeight}px`,
+                        }}
+                      />
+                    ) : null}
                     <div
-                      className={`max-w-md transition-all duration-500 ${
+                      className={`max-w-md pt-3 transition-all duration-500 ${
                         isActive
                           ? 'translate-y-0 opacity-100'
                           : 'translate-y-4 opacity-45'
