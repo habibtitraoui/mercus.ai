@@ -10,17 +10,17 @@ export function WorkforceSection() {
           Meet your AI Workforce
         </h2>
       </div>
-      <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-5">
+      <div className="mt-14 grid grid-cols-2 gap-5 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-5">
         {workforceCards.map((item) => {
           const Icon = item.icon
 
           return (
             <article
-              className="rounded-[10px] mt-8 border border-[rgba(17,17,17,0.03)] bg-white px-5 pt-5 pb-6 shadow-[0_10px_28px_rgba(245,130,32,0.06)] md:min-h-[174px] md:px-6 md:pt-6 md:pb-6 lg:min-h-[176px]"
+              className="rounded-[10px] mt-8 border border-[rgba(17,17,17,0.03)] bg-white px-5 pt-5 pb-6 shadow-[0_10px_28px_rgba(245,130,32,0.06)] md:min-h-43.5 md:px-6 md:pt-6 md:pb-6 lg:min-h-44"
               key={item.title}
             >
-              <div className=" mb-6 inline-flex h-8 w-8 items-center justify-center rounded-[6px] bg-[linear-gradient(180deg,#ffaf56_0%,#f58220_100%)] text-white shadow-[0_10px_22px_rgba(245,130,32,0.16),inset_0_1px_0_rgba(255,255,255,0.38)] md:h-9 md:w-9">
-                <Icon className="h-[18px] w-[18px] md:h-5 md:w-5" aria-hidden="true" />
+              <div className=" mb-6 inline-flex h-8 w-8 items-center justify-center rounded-md bg-[linear-gradient(180deg,#ffaf56_0%,#f58220_100%)] text-white shadow-[0_10px_22px_rgba(245,130,32,0.16),inset_0_1px_0_rgba(255,255,255,0.38)] md:h-9 md:w-9">
+                <Icon className="h-4.5 w-4.5 md:h-5 md:w-5" aria-hidden="true" />
               </div>
               <h3 className="mt-4 text-[1.25rem] font-semibold leading-[1.08] tracking-[-0.04em] text-[#111111] md:text-[1.375rem]">
                 {item.title}

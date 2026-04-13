@@ -2,18 +2,18 @@ import {
   ArrowLeftMD,
   ArrowRightMD,
   CheckAll,
-  Calendar,
   Chat,
   CloseCircle,
   Building,
-  Briefcase,
   Bulb,
+  Handbag,
+  HouseCheck,
+  Link,
   PaperPlane,
   Phone,
   PhoneCall,
   Play,
   Refresh,
-  ShoppingCart,
   User,
   UsersGroup,
 } from '../components/ui/coolicons'
@@ -93,22 +93,22 @@ export const industries: TextCard[] = [
   {
     title: 'Real Estate',
     text: 'AI qualifies property leads.',
-    icon: Building,
+    icon: HouseCheck,
   },
   {
     title: 'Service businesses',
     text: 'AI handles inquiries and follow-ups.',
-    icon: Briefcase,
+    icon: Link,
   },
   {
     title: 'Ecommerce',
     text: 'AI confirms orders and reduces the boring stuff.',
-    icon: ShoppingCart,
+    icon: Handbag,
   },
   {
     title: 'Restaurants and Clinics',
     text: 'AI handles reservations and messages.',
-    icon: Calendar,
+    icon: Building,
   },
 ]
 

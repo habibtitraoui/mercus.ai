@@ -10,7 +10,7 @@ export function ProblemsSection() {
           Your business is losing customers everyday!
         </h2>
       </div>
-      <div className="mt-16 grid grid-cols-1 justify-items-center gap-x-5 gap-y-5 md:grid-cols-2 md:gap-x-[55px] md:gap-y-[55px] lg:grid-cols-6">
+      <div className="mt-16 grid grid-cols-2 justify-items-center gap-x-5 gap-y-5 md:grid-cols-2 md:gap-x-[55px] md:gap-y-[55px] lg:grid-cols-6">
         {painPoints.map((item, index) => {
           const Icon = item.icon
           const offsetClassName =

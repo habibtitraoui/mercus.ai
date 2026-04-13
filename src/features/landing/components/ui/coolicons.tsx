@@ -11,6 +11,8 @@ import PhoneRaw from 'coolicons-react/src/outline/Communication/Phone.jsx'
 import CloseCircleRaw from 'coolicons-react/src/outline/Edit/CloseCircle.jsx'
 import CheckAllRaw from 'coolicons-react/src/outline/Interface/CheckAll.jsx'
 import CreditCard01Raw from 'coolicons-react/src/outline/Interface/CreditCard01.jsx'
+import HandbagRaw from 'coolicons-react/src/outline/Interface/Handbag.jsx'
+import LinkRaw from 'coolicons-react/src/outline/Interface/Link.jsx'
 import ShoppingCart02Raw from 'coolicons-react/src/outline/Interface/ShoppingCart02.jsx'
 import SuitcaseRaw from 'coolicons-react/src/outline/Interface/Suitcase.jsx'
 import BulbRaw from 'coolicons-react/src/outline/Live/Bulb.jsx'
@@ -55,7 +57,10 @@ export const Building = withCurrentColor(Building03Raw)
 export const Briefcase = withCurrentColor(SuitcaseRaw)
 export const Bulb = withCurrentColor(BulbRaw)
 export const CreditCard = withCurrentColor(CreditCard01Raw)
+export const Handbag = withCurrentColor(HandbagRaw)
 export const Headphone = withCurrentColor(HeadphonesRaw)
+export const HouseCheck = withCurrentColor(HouseCheckRaw)
+export const Link = withCurrentColor(LinkRaw)
 export const Mail = withCurrentColor(MailRaw)
 export const PaperPlane = withCurrentColor(PaperPlaneRaw)
 export const Phone = withCurrentColor(PhoneRaw)

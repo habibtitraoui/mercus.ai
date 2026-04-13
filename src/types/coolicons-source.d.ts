@@ -48,7 +48,17 @@ declare module 'coolicons-react/src/outline/Interface/CreditCard01.jsx' {
   export default Icon
 }
 
+declare module 'coolicons-react/src/outline/Interface/Handbag.jsx' {
+  const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
+  export default Icon
+}
+
 declare module 'coolicons-react/src/outline/Interface/CheckAll.jsx' {
+  const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
+  export default Icon
+}
+
+declare module 'coolicons-react/src/outline/Interface/Link.jsx' {
   const Icon: import('react').ComponentType<import('react').SVGProps<SVGSVGElement>>
   export default Icon
 }
