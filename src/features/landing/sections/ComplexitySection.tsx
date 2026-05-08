@@ -1,7 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
-import complexityGraph from '../../../assets/complexity-graph.svg'
+import stepOneImage from '../../../assets/1 1.svg'
+import stepTwoImage from '../../../assets/24 hours mercus robot.svg'
+import stepThreeImage from '../../../assets/learning mercus robot.svg'
 import { Eyebrow } from '../components/ui/Eyebrow'
 import { steps } from '../data/content'
+
+const stepImages = [stepOneImage, stepTwoImage, stepThreeImage]
 
 export function ComplexitySection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -151,7 +155,7 @@ export function ComplexitySection() {
                       alt=""
                       aria-hidden="true"
                       className="relative mx-auto w-[260px] max-w-full drop-shadow-[0_24px_48px_rgba(213,110,18,0.24)] sm:w-[340px] lg:w-[420px]"
-                      src={complexityGraph}
+                      src={stepImages[index]}
                     />
                   </div>
                 </div>

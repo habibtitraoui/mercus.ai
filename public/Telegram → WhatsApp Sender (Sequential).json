@@ -1,0 +1,1221 @@
+{
+  "name": "Telegram → WhatsApp Sender (Sequential)",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {
+          "download": false
+        }
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -7984,
+        3072
+      ],
+      "id": "b3b30c8f-cf59-42d4-93c8-6561e14102e0",
+      "name": "Telegram Trigger",
+      "webhookId": "de9bc14e-bdd5-4ab6-af81-eb872c831674",
+      "executeOnce": false,
+      "retryOnFail": false,
+      "credentials": {
+        "telegramApi": {
+          "id": "CkqzzeOA5lnNeebW",
+          "name": "telegram_whatsapp"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.text }}",
+                    "rightValue": "/start",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "682f2642-e4e6-4f67-a47c-6405a6240f0b"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "ab8587ec-f254-4172-9fc4-a2d5ce8dd658",
+                    "leftValue": "",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -7776,
+        3072
+      ],
+      "id": "78b94f02-41bd-4363-9206-a6328610b8c7",
+      "name": "Switch1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.message.from.id }}",
+        "text": "📩 *أرسل الصور أو الفيديو*\n\n🖼️ في حالة الصور*: يمكنك إرسال *مجموعة صور* دفعة واحدة*.\n🎥 في حالة الفيديو*: أرسل الفيديو مع النص معًا*.\n\n⚠️ *مهم*: إذا أرسلت صورًا، *لا ترسل معها نصًا*.\n\n✅ بعد إرسال جميع الصور، قم بكتابة النص المراد إرساله مع الصور.",
+        "additionalFields": {
+          "appendAttribution": false,
+          "parse_mode": "Markdown"
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -7520,
+        2688
+      ],
+      "id": "b215f1fe-b310-4d28-9379-1873db5cfb6f",
+      "name": "Send a text message1",
+      "webhookId": "a9fef63f-6ec2-49ce-a646-fbc9d9b3aa7f",
+      "credentials": {
+        "telegramApi": {
+          "id": "CkqzzeOA5lnNeebW",
+          "name": "telegram_whatsapp"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "e3c6780e-b079-42da-a577-575c3139542d",
+              "leftValue": "={{ $json.message.caption }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -7488,
+        3088
+      ],
+      "id": "26e7e29b-9674-4ba0-ab91-d0bef3ddee58",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93a66344-7e9a-450a-bfdb-13be229eda33",
+              "name": "id",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "string"
+            },
+            {
+              "id": "ff9b0c3b-bdc2-48dd-8230-00a121150fc5",
+              "name": "text",
+              "value": "={{ $json.message.caption }}",
+              "type": "string"
+            },
+            {
+              "id": "003e5404-d53b-4a01-b5e1-5a2d1323c907",
+              "name": "id_video",
+              "value": "={{ $json.message.video.file_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -7120,
+        3584
+      ],
+      "id": "9c44dcf5-b69f-4ddf-893f-a230b3b7af09",
+      "name": "video1"
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.id_video }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -6896,
+        3584
+      ],
+      "id": "0b8ae5f0-ef5e-475a-8188-dba31c5fe416",
+      "name": "Get a file1",
+      "webhookId": "214a9152-77b2-47ed-b344-3499c012c416",
+      "credentials": {
+        "telegramApi": {
+          "id": "CkqzzeOA5lnNeebW",
+          "name": "telegram_whatsapp"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs",
+          "mode": "list",
+          "cachedResultName": "whatsapp template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -6672,
+        3584
+      ],
+      "id": "d374a65e-26cb-4d3c-81c5-cd4587661f9e",
+      "name": "Get row(s) in sheet1",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QHrROJ1mqIToS8uA",
+          "name": "zwealthman11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -6352,
+        3536
+      ],
+      "id": "bbd663a9-f4ac-473f-8873-cbae903f83c4",
+      "name": "Loop Over Items1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.wasenderapi.com/api/send-message",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 127d79c53dc965a0f3e6563fb70e3a0fa5085a54af3286129eec37baa6f07c43"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n      \"to\": \"+213{{ $('Get row(s) in sheet1').item.json.number }}\",\n      \"text\": \"{{ $('video1').item.json.text }}\",\n      \"videoUrl\": \"https://api.telegram.org/file/bot8651447532:AAHt4ynQ7nPnOpdtflZCUZLocL-EVebTVuY/{{ $('Get a file1').item.json.result.file_path }}\"\n  }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -6048,
+        3568
+      ],
+      "id": "abcba5ac-7481-4dc8-815c-cabc163fd676",
+      "name": "video"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -5792,
+        3584
+      ],
+      "id": "d32be56a-3430-4d33-b1d4-37fcff0ee618",
+      "name": "Wait1",
+      "webhookId": "e4311620-71dc-4c60-a6b9-54b4ee2ccb23"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "3af047e4-cb96-4342-b201-9478e6a16a77",
+              "leftValue": "={{ $json.message.text }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -7104,
+        3184
+      ],
+      "id": "6e693a12-f015-45ff-ad47-a1f7a889bb84",
+      "name": "If2"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.photo }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "array",
+                      "operation": "exists",
+                      "singleValue": true
+                    },
+                    "id": "896f413e-9609-4e61-82d2-68910b8d26b8"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "image"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "09d21b86-95eb-4f03-a8dd-ed8eaf7ba921",
+                    "leftValue": "={{ $json.message.video }}",
+                    "rightValue": "",
+                    "operator": {
+                      "type": "object",
+                      "operation": "exists",
+                      "singleValue": true
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "video"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        -6896,
+        3264
+      ],
+      "id": "07094eed-0cd0-4046-ac81-ed7fba6cbbb4",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93a66344-7e9a-450a-bfdb-13be229eda33",
+              "name": "id",
+              "value": "={{ $json.message.chat.id }}",
+              "type": "number"
+            },
+            {
+              "id": "08408ed6-0496-46de-9fdf-e9d5c3c31661",
+              "name": "image",
+              "value": "={{ $json.message.photo }}",
+              "type": "array"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -6464,
+        3264
+      ],
+      "id": "fc20d7b3-8095-446d-a5e4-e73e45c648b0",
+      "name": "image1",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "resource": "file",
+        "fileId": "={{ $json.image[2].file_id }}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -6240,
+        3264
+      ],
+      "id": "cefc81a4-f218-4803-8309-14eea8cfebe4",
+      "name": "Get a file",
+      "webhookId": "214a9152-77b2-47ed-b344-3499c012c416",
+      "executeOnce": true,
+      "credentials": {
+        "telegramApi": {
+          "id": "CkqzzeOA5lnNeebW",
+          "name": "telegram_whatsapp"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "d6039c2c-76c0-44a5-8d3e-2431178d80a7",
+              "name": "link",
+              "value": "=https://api.telegram.org/file/bot8651447532:AAHt4ynQ7nPnOpdtflZCUZLocL-EVebTVuY/{{ $json.result.file_path }}",
+              "type": "string"
+            },
+            {
+              "id": "1b676cfe-cab6-46b4-8fb2-8d11a02f6797",
+              "name": "id",
+              "value": "={{ $json.result.file_path }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -5840,
+        3264
+      ],
+      "id": "96b7e28a-b436-437e-a2a2-51b63c1664b0",
+      "name": "Edit Fields",
+      "executeOnce": false
+    },
+    {
+      "parameters": {
+        "tableId": "data",
+        "dataToSend": "autoMapInputData"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -5424,
+        3440
+      ],
+      "id": "0f9742ff-d502-490c-ae42-36099e9e6dc0",
+      "name": "Create a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "URnieokJ3ZlLWdnf",
+          "name": "kacem"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "data"
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -6848,
+        2848
+      ],
+      "id": "b19a2623-652d-4ef4-9e1e-214ac697b3c2",
+      "name": "Get many rows",
+      "credentials": {
+        "supabaseApi": {
+          "id": "URnieokJ3ZlLWdnf",
+          "name": "kacem"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs",
+          "mode": "list",
+          "cachedResultName": "whatsapp template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -6896,
+        3072
+      ],
+      "id": "d115e2b7-eaad-4efe-b22b-c28a0ce48d79",
+      "name": "Get row(s) in sheet3",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QHrROJ1mqIToS8uA",
+          "name": "zwealthman11"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -6672,
+        2976
+      ],
+      "id": "41369de0-5d91-4359-9d8b-1921ec95aa15",
+      "name": "Merge1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $input.all().map(i => i.json);\nconst numbers = data.filter(item => item.number !== undefined);\nconst images = data.filter(item => item.link);\nconst combinations = [];\n\nfor (const num of numbers) {\n  for (const img of images) {\n    combinations.push({\n      json: {\n        phone: String(num.number),\n        image_url: img.link\n      }\n    });\n  }\n}\n\nreturn combinations;"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6448,
+        2976
+      ],
+      "id": "3ad63d14-fe5f-4a8c-9b5d-b3c4aada255b",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -6224,
+        2976
+      ],
+      "id": "d66ba9cc-a0b6-47a3-a5c0-10353a05768d",
+      "name": "Loop Over Items3"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.wasenderapi.com/api/send-message",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 127d79c53dc965a0f3e6563fb70e3a0fa5085a54af3286129eec37baa6f07c43"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n      \"to\": \"+213{{ $json.phone }}\",\n      \"imageUrl\": \"{{ $json.image_url }}\"\n  }",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -6000,
+        2976
+      ],
+      "id": "e868e81f-2698-414f-a5f4-e43bef6512cf",
+      "name": "image2",
+      "executeOnce": false
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -5776,
+        2976
+      ],
+      "id": "38ef6790-c4ef-46b9-b91b-1bc20eb4cbb3",
+      "name": "Wait3",
+      "webhookId": "22bc06fd-bd84-4cc2-9490-cab58f1da402"
+    },
+    {
+      "parameters": {
+        "jsCode": "// النص من الـ node السابق مباشرة\nconst text = $('Code in JavaScript2').first().json.text;\n\nif (!text || String(text).trim() === '') return [];\n\n// الأرقام هي الـ items الحالية من Google Sheets\nreturn items.map(item => ({\n  json: {\n    text: String(text).trim(),\n    number: String(item.json.number).trim()\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6720,
+        2544
+      ],
+      "id": "e94bf69e-ac3e-4796-8a5f-7a45e0c68ef8",
+      "name": "Code in JavaScript2"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs",
+          "mode": "list",
+          "cachedResultName": "whatsapp template",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1v1TYxbn3hP_SgKS_5ASHrcaKy1-wzFSEBkJemUyOZKs/edit#gid=0"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        -6448,
+        2544
+      ],
+      "id": "abb429f3-d00c-4a6c-a326-ea1a46e7c20b",
+      "name": "Get row(s) for text",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "QHrROJ1mqIToS8uA",
+          "name": "zwealthman11"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// =============================================\n// الإصلاح الرئيسي:\n// نجمع النص مع كل الأرقام قبل الـ Loop\n// items[0] = { text } من Code in JavaScript2\n// items[1..n] = { number, ... } من Google Sheets\n// =============================================\n\nconst textItem = items.find(i => i.json.text !== undefined && String(i.json.text).trim() !== '');\nconst numberItems = items.filter(i => i.json.number !== undefined);\n\nif (!textItem) return [];\n\nconst text = String(textItem.json.text).trim();\n\n// نُنشئ عنصر لكل رقم يحتوي على النص\nreturn numberItems.map(item => ({\n  json: {\n    text: text,\n    number: String(item.json.number).trim()\n  }\n}));"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -6224,
+        2496
+      ],
+      "id": "9fab07fa-0198-417f-b25d-583dd6f28309",
+      "name": "Code in JavaScript3"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitInBatches",
+      "typeVersion": 3,
+      "position": [
+        -5984,
+        2496
+      ],
+      "id": "62e3397e-5f89-4a65-a9b4-69bb4d4acf79",
+      "name": "Loop Over Items4"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://www.wasenderapi.com/api/send-message",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer 127d79c53dc965a0f3e6563fb70e3a0fa5085a54af3286129eec37baa6f07c43"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "to",
+              "value": "=+213{{ $json.number }}"
+            },
+            {
+              "name": "text",
+              "value": "={{ $json.text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        -5744,
+        2496
+      ],
+      "id": "b93dddc4-a0df-4010-a16f-615db969e757",
+      "name": "text",
+      "executeOnce": false
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        -5504,
+        2496
+      ],
+      "id": "0dd0785d-4244-479b-a9b9-00a8f6854cbf",
+      "name": "Wait4",
+      "webhookId": "6e9fbba0-3874-417d-be5b-aa2bc4b1f5f4"
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "tableId": "data",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "link",
+              "condition": "eq",
+              "keyValue": "={{ $json.link }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -4736,
+        2416
+      ],
+      "id": "24878827-7a45-42bb-9815-b87f07f685b4",
+      "name": "Delete a row",
+      "credentials": {
+        "supabaseApi": {
+          "id": "URnieokJ3ZlLWdnf",
+          "name": "kacem"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "ec99d9f4-b7d9-4004-a84e-1522e4b55421",
+              "leftValue": "={{ $json.link }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        -4912,
+        2624
+      ],
+      "id": "438768b8-3bf7-4d3a-b66e-f71c1878d0a9",
+      "name": "If1"
+    }
+  ],
+  "pinData": {
+    "Telegram Trigger": [
+      {
+        "json": {
+          "update_id": 344131687,
+          "message": {
+            "message_id": 130,
+            "from": {
+              "id": 8121441530,
+              "is_bot": false,
+              "first_name": "M",
+              "last_name": "K",
+              "username": "kacimoouu",
+              "language_code": "fr",
+              "is_premium": true
+            },
+            "chat": {
+              "id": 8121441530,
+              "first_name": "M",
+              "last_name": "K",
+              "username": "kacimoouu",
+              "type": "private"
+            },
+            "date": 1776458413,
+            "text": "Slm"
+          }
+        },
+        "pairedItem": {
+          "item": 0
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Telegram Trigger": {
+      "main": [
+        [
+          {
+            "node": "Switch1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch1": {
+      "main": [
+        [
+          {
+            "node": "Send a text message1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "video1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "If2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Code in JavaScript2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "video1": {
+      "main": [
+        [
+          {
+            "node": "Get a file1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file1": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items1": {
+      "main": [
+        [],
+        [
+          {
+            "node": "video",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "video": {
+      "main": [
+        [
+          {
+            "node": "Wait1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait1": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If2": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get many rows",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "image1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "image1": {
+      "main": [
+        [
+          {
+            "node": "Get a file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get a file": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Create a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get many rows": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items3": {
+      "main": [
+        [],
+        [
+          {
+            "node": "image2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "image2": {
+      "main": [
+        [
+          {
+            "node": "Wait3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript2": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) for text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) for text": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript3": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Loop Over Items4": {
+      "main": [
+        [],
+        [
+          {
+            "node": "text",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "text": {
+      "main": [
+        [
+          {
+            "node": "Wait4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait4": {
+      "main": [
+        [
+          {
+            "node": "Loop Over Items4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Delete a row",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "9c0d1c58-5819-4276-992c-53d3cd24f345",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "b7d1dc160be461484047f2d2a39729b9e3cfb805d7ea9a0b885240015602c470"
+  },
+  "id": "xQBxoyrjJnedoInz",
+  "tags": []
+}
