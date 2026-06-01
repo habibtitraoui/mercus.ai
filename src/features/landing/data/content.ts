@@ -142,11 +142,26 @@ export const testimonials: Testimonial[] = [
 ]
 
 export const faqs = [
-  'What is Mercus?',
-  'What channels does Mercus support?',
-  'How long does setup take?',
-  'Can I customize the AI agents?',
-  'Do you offer voice and text automation?',
+  {
+    question: 'Does the System Speak Darja Well?',
+    answer: 'Yes, it understands Darja, French, and mixed messages the way your customers actually type. It even understands pictures, screenshots, and voice messages in Darja.',
+  },
+  {
+    question: 'What happens when the bot gets it wrong?',
+    answer: 'It hands the conversation to your team automatically. You get a Telegram notification and take over, no one notices.',
+  },
+  {
+    question: 'Will it work with my Shopify or WooCommerce store?',
+    answer: 'Yes. It connects directly to your store and pulls products, prices, and orders in real time. Even if you have a custom made website, we can connect it if you provide us with the API documentation.',
+  },
+  {
+    question: 'Can it connect with the Shipping Company I work with?',
+    answer: 'Yes, we integrate with Yalidine, Zr Express, and Maystro and more. Once connected, the bot can automatically create shipments, share tracking numbers with customers, and update order status in real time.',
+  },
+  {
+    question: 'What happens if I change my prices or add new products?',
+    answer: 'Nothing breaks. Since the bot is connected directly to your store, any price change or new product you add is picked up automatically. You don\'t need to update anything on our side, it stays in sync on its own.',
+  },
 ]
 
 export const footerLinks: NavItem[] = [

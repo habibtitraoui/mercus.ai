@@ -83,7 +83,7 @@ export function ResearchSection() {
 
   useEffect(() => {
     if (!sectionRef.current || typeof IntersectionObserver === 'undefined') {
-      setIsVisible(true)
+      setTimeout(() => setIsVisible(true), 0)
       return
     }
 
@@ -103,7 +103,7 @@ export function ResearchSection() {
   }, [])
 
   return (
-    <section className="mx-auto max-w-[1180px] text-center" ref={sectionRef}>
+    <section className="mx-auto max-w-295 text-center" ref={sectionRef}>
       <div
         className={`transition-all duration-700 ease-out motion-reduce:transition-none ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
@@ -112,7 +112,7 @@ export function ResearchSection() {
         <Eyebrow>Mercus Strength</Eyebrow>
       </div>
       <h2
-        className={`mx-auto max-w-[1120px] text-center text-[clamp(2.25rem,6vw,64px)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#111111] transition-all delay-100 duration-700 ease-out motion-reduce:transition-none ${
+        className={`mx-auto max-w-280 text-center text-[clamp(2.25rem,6vw,64px)] font-semibold leading-[1.12] tracking-[-0.045em] text-[#111111] transition-all delay-100 duration-700 ease-out motion-reduce:transition-none ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
         }`}
       >
@@ -124,7 +124,7 @@ export function ResearchSection() {
       <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
         {researchStats.map((stat, index) => (
           <article
-            className={`group relative overflow-hidden rounded-[24px] border border-[#edf0f4] bg-white px-8 py-8 text-left shadow-[0_18px_40px_rgba(17,17,17,0.03)] transition-all duration-700 ease-out hover:-translate-y-2 hover:border-[#ffd6a3] hover:bg-[#fff8f3] hover:shadow-[0_24px_50px_rgba(245,130,32,0.12)] motion-reduce:transition-none ${
+            className={`group relative overflow-hidden rounded-3xl border border-[#edf0f4] bg-white px-8 py-8 text-left shadow-[0_18px_40px_rgba(17,17,17,0.03)] transition-all duration-700 ease-out hover:-translate-y-2 hover:border-[#ffd6a3] hover:bg-[#fff8f3] hover:shadow-[0_24px_50px_rgba(245,130,32,0.12)] motion-reduce:transition-none ${
               isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
             }`}
             key={stat.title}
@@ -152,14 +152,14 @@ export function ResearchSection() {
               {stat.text}
             </p>
             <span
-              className="absolute inset-x-0 bottom-0 h-1.5 origin-left scale-x-0 rounded-b-[24px] bg-[linear-gradient(90deg,#ff6b10_0%,#ff9d0b_100%)] transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
+              className="absolute inset-x-0 bottom-0 h-1.5 origin-left scale-x-0 rounded-b-3xl bg-[linear-gradient(90deg,#ff6b10_0%,#ff9d0b_100%)] transition-transform duration-500 ease-out group-hover:scale-x-100 motion-reduce:transition-none"
               aria-hidden="true"
             />
           </article>
         ))}
       </div>
       <div
-        className={`mx-auto mt-16 flex max-w-[800px] flex-col items-center justify-between gap-6 rounded-2xl bg-[linear-gradient(90deg,#ff6b10_0%,#ff9d0b_100%)] px-8 py-8 text-white shadow-[0_24px_50px_rgba(245,130,32,0.24)] transition-all duration-700 ease-out motion-reduce:transition-none sm:flex-row sm:px-10 ${
+        className={`mx-auto mt-16 flex max-w-200 flex-col items-center justify-between gap-6 rounded-2xl bg-[linear-gradient(90deg,#ff6b10_0%,#ff9d0b_100%)] px-8 py-8 text-white shadow-[0_24px_50px_rgba(245,130,32,0.24)] transition-all duration-700 ease-out motion-reduce:transition-none sm:flex-row sm:px-10 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
         }`}
         style={{ transitionDelay: isVisible ? '680ms' : '0ms' }}
