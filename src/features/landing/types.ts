@@ -23,6 +23,7 @@ export type Testimonial = {
   name: string
   role: string
   text: string
+  logo?: string
 }
 
 export type PainPoint = {

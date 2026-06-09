@@ -74,9 +74,17 @@ export function TestimonialsSection() {
               className="w-full shrink-0 snap-start basis-full rounded-[14px] border border-[rgba(17,17,17,0.03)] bg-white px-5 py-4 text-left shadow-[0_10px_28px_rgba(17,17,17,0.05)] md:basis-[calc((100%-24px)/2)] md:px-6 md:py-5 lg:basis-[calc((100%-48px)/2.5)]"
             >
               <div className="flex items-start gap-4">
-                <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[1rem] font-semibold uppercase tracking-[-0.04em] text-[#111111] shadow-[0_6px_14px_rgba(17,17,17,0.14)]">
-                  {getInitials(item.name)}
-                </div>
+                {item.logo ? (
+                  <img
+                    src={item.logo}
+                    alt={`${item.name} logo`}
+                    className="h-12 w-12 shrink-0 rounded-[12px] bg-black object-contain p-1 shadow-[0_6px_14px_rgba(17,17,17,0.14)]"
+                  />
+                ) : (
+                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[1rem] font-semibold uppercase tracking-[-0.04em] text-[#111111] shadow-[0_6px_14px_rgba(17,17,17,0.14)]">
+                    {getInitials(item.name)}
+                  </div>
+                )}
                 <div className="min-w-0">
                   <h3 className="text-[1.125rem] font-semibold leading-[1.1] tracking-[-0.03em] text-[#111111] md:text-[1.625rem]">
                     {item.name}

@@ -17,6 +17,9 @@ import {
   User,
   UsersGroup,
 } from '../components/ui/coolicons'
+import vintageDivisionLogo from '../../../assets/vinatge.jpeg'
+import xaraCosmetiqueLogo from '../../../assets/xara.jpeg'
+import catchShopLogo from '../../../assets/cat.jpeg'
 import type {
   NavItem,
   PainPoint,
@@ -120,24 +123,22 @@ export const landingUiIcons = {
 
 export const testimonials: Testimonial[] = [
   {
-    name: 'Xara cosmetic',
-    role: 'Founder',
-    text: 'Mercus helped us stop losing leads at night. Messages now get answered right away and our team only steps in when needed.',
+    name: 'Xara cosmétique',
+    role: 'E-com Hair products',
+    text: 'le System hada vraiment 3awni n scaler les campaign ta3i , Wellit ndir Ads w ng3ed netfarej f les commandes ydakhlou l sheet automatiquement, merci bcp rayane.',
+    logo: xaraCosmetiqueLogo,
   },
   {
-    name: 'Ousssama Ben Abla',
-    role: 'Consultant',
-    text: 'The setup was simple, and the handoff felt smooth. It now follows up faster than any assistant we hired before.',
+    name: 'Oussama Ben Abila',
+    role: 'E-com Cat shop',
+    text: 'ملي درت الsystem ديالكم ما عاودت خسرت دراهم على ادمين، و الله النهار ديالي ف الخدمة كان 90% انا نريبوندي على les messages، دوكا الحمد لله ما نشوفوهمش كامل ، يعطيكم الصحا.',
+    logo: catchShopLogo,
   },
   {
-    name: 'Annonymous',
-    role: 'Business owner',
-    text: 'Our prospects get replies in minutes, not hours. That alone changed the number of people who stayed in the funnel.',
-  },
-  {
-    name: 'Mira Studio',
-    role: 'Operations lead',
-    text: 'Before Mercus, our team missed weekend enquiries. Now every message gets a fast reply, and booked calls come in far more consistently.',
+    name: 'Vintage Division',
+    role: 'E-com Clothes',
+    text: 'خويا لعزيز لحد الان عندو سمانة و هو خدام الله يبارك ، كنت عندي ادمين يحطلي ماكس 30 كومند في النهار ، دوكا ندخل نلقى 90 الله يبارك ، و زيد الكاليتي تاع السيرفيس راني نشوف الناس كامل راضية على الخدمة ، بارك الله فيكم و كملو فيها',
+    logo: vintageDivisionLogo,
   },
 ]
 
